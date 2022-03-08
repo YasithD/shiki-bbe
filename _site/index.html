@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ballerina by Example</title>
+  </head>
+  <body>
+    <pre><code id="code" class="code">import ballerina/io;
+
+// Modules and functions can declare variables. You can see both in this example.
+// Here we declare a variable `greeting` of type `string` and initialize it to `&quot;Hello&quot;`.
+string greeting = &quot;Hello&quot;;
+    
+public function main() {
+    // Assignments are statements not expressions.
+    string name = &quot;Ballerina&quot;;
+    
+    io:println(greeting, &quot; &quot;, name);
+}
+</code></pre>
+
+
+    <script src="https://unpkg.com/shiki"></script>
+
+    <script>
+      shiki
+        .getHighlighter({
+          theme: "nord",
+        })
+        .then((highlighter) => {
+          const code = document.getElementById("code");
+          const output = highlighter.codeToHtml(`${code.innerHTML}`, {
+            lang: "js",
+          });
+          document.getElementById("code").innerHTML = output;
+        });
+    </script>
+  </body>
+</html>
