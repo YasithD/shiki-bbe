@@ -19,7 +19,7 @@
         .then((highlighter) => {
           const code = document.getElementById("code");
           const output = highlighter.codeToHtml(`${code.innerHTML}`, {
-            lang: "js",
+            lang: "ballerina",
           });
           document.getElementById("code").innerHTML = output;
         });
