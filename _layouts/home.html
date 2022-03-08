@@ -7,22 +7,32 @@
     <title>{{ page.title }}</title>
   </head>
   <body>
-    {{ content }}
-
     <script src="https://unpkg.com/shiki"></script>
 
+    {{ content }}
+
     <script>
-      shiki
-        .getHighlighter({
-          theme: "nord",
-        })
-        .then((highlighter) => {
-          const code = document.getElementById("code");
-          const output = highlighter.codeToHtml(`${code.innerHTML}`, {
-            lang: "ballerina",
+      const themes = [
+        "dracula",
+        "github-dark",
+        "github-light",
+        "material-default",
+        "nord",
+      ];
+      const code_blocks = document.getElementsByClassName("code");
+      for (let i = 0; i < themes.length; i++) {
+        shiki
+          .getHighlighter({
+            theme: themes[i],
+          })
+          .then((highlighter) => {
+            const code = code_blocks[i];
+            const output = highlighter.codeToHtml(`${code.innerHTML}`, {
+              lang: "ballerina",
+            });
+            document.getElementsByClassName("code")[i].innerHTML = output;
           });
-          document.getElementById("code").innerHTML = output;
-        });
+      }
     </script>
   </body>
 </html>
