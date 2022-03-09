@@ -7,33 +7,23 @@
     <title>{{ page.title }}</title>
   </head>
   <body>
-    <!-- <script src="https://unpkg.com/shiki"></script> -->
-    <script src="{{ 'shiki/dist/index.unpkg.iife.js' | node_module_url | relative_url }}"></script>
+    <script src="https://unpkg.com/shiki"></script>
 
     {{ content }}
 
     <script>
-      const themes = [
-        "dracula",
-        "github-dark",
-        "github-light",
-        "material-default",
-        "nord",
-      ];
-      const code_blocks = document.getElementsByClassName("code");
-      for (let i = 0; i < themes.length; i++) {
-        shiki
-          .getHighlighter({
-            theme: themes[i],
-          })
-          .then((highlighter) => {
-            const code = code_blocks[i];
-            const output = highlighter.codeToHtml(`${code.innerHTML}`, {
-              lang: "ballerina",
-            });
-            document.getElementsByClassName("code")[i].innerHTML = output;
+      shiki
+        .getHighlighter({
+          theme: "material-default",
+          langs: ["ballerina"],
+        })
+        .then((highlighter) => {
+          const code = document.getElementById("code");
+          const output = highlighter.codeToHtml(`${code.innerHTML}`, {
+            lang: "ballerina",
           });
-      }
+          document.getElementById("code").innerHTML = output;
+        });
     </script>
   </body>
 </html>
