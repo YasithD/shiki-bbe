@@ -12,18 +12,64 @@
     {{ content }}
 
     <script>
-      shiki
-        .getHighlighter({
-          theme: "material-default",
-          langs: ["ballerina"],
-        })
-        .then((highlighter) => {
-          const code = document.getElementById("code");
-          const output = highlighter.codeToHtml(`${code.innerHTML}`, {
-            lang: "ballerina",
+      const themes = [
+        "dark-plus",
+        "dracula-soft",
+        "dracula",
+        "github-dark-dimmed",
+        "github-dark",
+        "github-light",
+        "hc_light",
+        "light-plus",
+        "material-darker",
+        "material-default",
+        "material-lighter",
+        "material-ocean",
+        "material-palenight",
+        "min-dark",
+        "min-light",
+        "monokai",
+        "nord",
+        "one-dark-pro",
+        "poimandres",
+        "rose-pine-dawn",
+        "rose-pine-moon",
+        "rose-pine",
+        "slack-dark",
+        "slack-ochin",
+        "solarized-dark",
+        "solarized-light",
+        "vitesse-dark",
+        "vitesse-light",
+      ];
+      const container = document.getElementById("container");
+      const code_block = document.getElementById("code-block");
+      container.removeChild(code_block);
+
+      for (let i = 0; i < themes.length; i++) {
+        const theme_name = document.createElement("h1");
+        theme_name.innerHTML = `${i + 1}: ${themes[i]}`;
+        container.appendChild(theme_name);
+
+        const block = code_block.cloneNode(true);
+        container.appendChild(block);
+
+        const line_break = document.createElement("br");
+        container.appendChild(line_break);
+
+        shiki
+          .getHighlighter({
+            theme: themes[i],
+            langs: ["ballerina"],
+          })
+          .then((highlighter) => {
+            const code = document.getElementsByClassName("code")[i];
+            const output = highlighter.codeToHtml(`${code.innerHTML}`, {
+              lang: "ballerina",
+            });
+            document.getElementsByClassName("code")[i].innerHTML = output;
           });
-          document.getElementById("code").innerHTML = output;
-        });
+      }
     </script>
   </body>
 </html>
